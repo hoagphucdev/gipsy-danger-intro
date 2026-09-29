@@ -189,6 +189,14 @@ html, body, #root { margin: 0; height: 100%; overflow: hidden; }
 .page__figures dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2vw, 30px); line-height: 1; color: var(--accent); }
 
 .page__body { margin: 0 0 14px; font-size: 15.5px; line-height: 1.65; color: var(--prose); }
+.page__plate { margin: 18px 0 8px; }
+.page__plate img { display: block; width: 100%; height: auto; }
+.page__plate figcaption { margin-top: 6px; font-style: italic; font-size: 12px; color: var(--muted); }
+.page__timeline { margin: 18px 0 6px; padding: 0; list-style: none; border-left: 1px solid var(--rule); }
+.page__timeline li { position: relative; display: grid; grid-template-columns: 5.5em 1fr; gap: 12px; padding: 0 0 12px 16px; }
+.page__timeline li::before { content: ''; position: absolute; left: -4px; top: 5px; width: 7px; height: 7px; background: var(--accent); }
+.page__timeline time { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.page__timeline p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--prose); }
 .page mark { padding: 0 0.15em; color: var(--accent); background: rgb(240 166 74 / 0.14); border-radius: 2px; }
 
 .page__specs { width: 100%; margin: 20px 0 10px; border-collapse: collapse; }

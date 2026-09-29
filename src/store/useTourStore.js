@@ -7,10 +7,12 @@ export const useTourStore = create((set, get) => ({
   index: 0, // current stop in PARTS
   hovered: null, // part id under the pointer
   stops: null, // [{ position, target }] computed from the skeleton once the robot is loaded
+  plates: null, // { [partId | 'all']: PNG data URL } report figures, see lib/figures.js
   goTo: (i) => set({ index: clampIndex(i) }),
   step: (dir) => set({ index: clampIndex(get().index + dir) }),
   setHovered: (hovered) => get().hovered !== hovered && set({ hovered }),
   setStops: (stops) => set({ stops }),
+  setPlates: (plates) => set({ plates }),
 }))
 
 export const partIndex = (id) => PARTS.findIndex((p) => p.id === id)

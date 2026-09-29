@@ -3,7 +3,7 @@ import { PART_CONTENT, SOURCES } from '../config/partContent'
 import { PARTS } from '../config/tour'
 import { useTourStore } from '../store/useTourStore'
 import { Author } from './Author'
-import { enterFreeView } from './FreeView'
+import { enterFreeView } from './modes'
 import { RichText } from './RichText'
 import { useTourInput } from './useTourInput'
 
@@ -16,6 +16,7 @@ const pad = (n) => String(n).padStart(2, '0')
 export function PartPage() {
   const index = useTourStore((s) => s.index)
   const goTo = useTourStore((s) => s.goTo)
+  const plates = useTourStore((s) => s.plates)
   const part = PARTS[index]
   const c = PART_CONTENT[part.id]
   useTourInput()
@@ -55,6 +56,26 @@ export function PartPage() {
         </p>
       ))}
 
+      {plates && (
+        <figure className="page__plate">
+          <img src={plates[part.id] ?? plates.all} alt={`Front and side elevation of Gipsy Danger${part.owns.length ? `, ${c.title} highlighted` : ''}`} />
+          <figcaption>
+            Fig. {index + 2}a — {part.owns.length ? `Location of the ${c.title}` : 'General arrangement'}: front and side elevation.
+          </figcaption>
+        </figure>
+      )}
+
+      {c.timeline && (
+        <ol className="page__timeline">
+          {c.timeline.map(([when, what], i) => (
+            <li key={i}>
+              <time>{when}</time>
+              <p>{what}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+
       <table className="page__specs">
         <caption>
           Table {index + 1} — {c.title} specifications
@@ -69,7 +90,7 @@ export function PartPage() {
         </tbody>
       </table>
       <p className="page__figure">
-        Fig. {index + 2} — {c.title}, live view (right). Drag to inspect, click a part to jump to it.
+        Fig. {index + 2}b — {c.title}, live view (right). Drag to inspect, click a part to jump to it.
       </p>
 
       <nav className="page__toc" aria-label="Report sections">

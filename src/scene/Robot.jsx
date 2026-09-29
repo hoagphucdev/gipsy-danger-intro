@@ -9,6 +9,7 @@ import { useRobotStore } from '../store/useRobotStore'
 import { useTourStore } from '../store/useTourStore'
 import { usePartHighlight } from './robot/usePartHighlight'
 import { usePartPicking } from './robot/usePartPicking'
+import { usePlates } from './robot/usePlates'
 import { useReactor } from './robot/useReactor'
 import { useRobotIdle } from './robot/useRobotIdle'
 
@@ -27,6 +28,7 @@ export function Robot() {
   useReactor(scene, reactor)
   usePartHighlight(highlights)
   usePartPicking(scene)
+  usePlates(scene)
 
   return <primitive object={scene} scale={MODEL.height / MODEL.sourceHeight} />
 }

@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 
 // Stages: waiting for the model -> crane shot -> part-by-part tour <-> free view.
-// A later phase adds 'analyze' (exploded view).
 export const STAGES = ['loading', 'intro', 'tour', 'free']
 
 /** Stages where the user inspects the robot (hover highlight, click to jump). */

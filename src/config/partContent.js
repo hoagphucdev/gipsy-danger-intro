@@ -1,6 +1,7 @@
 // Report text for each tour part (keyed by PARTS id in config/tour.js).
 // Lore from Pacific Rim (2013) and the Pacific Rim Wiki — fictional.
 // In `lead` and `body`, **double asterisks** mark a highlighted figure or term.
+// Optional: `timeline` ([when, what] rows) for history pages.
 
 export const PART_CONTENT = {
   head: {
@@ -165,6 +166,5 @@ export const PART_CONTENT = {
     ],
   },
 }
-
 
 export const SOURCES = 'Sources: Pacific Rim (2013); Pacific Rim Wiki. Fictional lore.'

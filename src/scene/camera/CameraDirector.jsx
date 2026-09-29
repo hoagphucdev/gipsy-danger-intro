@@ -33,24 +33,22 @@ export function CameraDirector() {
 
   // new stop (or entering the tour): fly from wherever the camera is now
   useEffect(() => {
-    if (stage !== 'tour' || !stops || !controls) return
-    flight.current = {
-      fromPosition: camera.position.clone(),
-      fromTarget: controls.target.clone(),
-      to: stops[index],
-      t: 0,
-    }
+    if (!controls) return
+    const to = stage === 'tour' && stops ? stops[index] : null
+    if (to) flight.current = { fromPosition: camera.position.clone(), fromTarget: controls.target.clone(), to, t: 0 }
   }, [stage, index, stops, controls, camera])
 
   useFrame(({ size }, dt) => {
     if (!controls) return
     // make room for the text column on the left (desktop layout only)
-    const wantShift = size.width <= 640 || free ? 0 : stage === 'tour' ? TOUR.screenShift : INTRO.screenShift
+    const shifts = { tour: TOUR.screenShift, free: 0 }
+    const wantShift = size.width <= 640 ? 0 : (shifts[stage] ?? INTRO.screenShift)
     shift.current = MathUtils.damp(shift.current, wantShift, 4, dt)
     setScreenShift(camera, shift.current)
 
     if (free) {
-      controls.enabled = true
+      fly(flight, camera, controls, dt)
+      controls.enabled = !flight.current
       controls.target.clamp(bounds.min, bounds.max) // panning cannot leave the bay
       return
     }
